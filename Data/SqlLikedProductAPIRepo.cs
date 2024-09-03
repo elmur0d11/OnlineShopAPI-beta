@@ -17,7 +17,10 @@ namespace CommandAPI.Data
             if (likedProduct == null)
                 throw new ArgumentNullException(nameof(likedProduct));
 
-            await _context.LikedProducts.AddAsync(likedProduct);
+            else if (likedProduct.Id == likedProduct.Id)
+                throw new Exception("You already Liked to this Product");
+
+                await _context.LikedProducts.AddAsync(likedProduct);
         }
 
         public void DeleteProduct(LikedProduct likedProduct)

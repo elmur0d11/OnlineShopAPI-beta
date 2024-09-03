@@ -48,6 +48,17 @@ namespace CommandAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<BuyedProductReadDto>>(buyedProducts));
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var product = await _repository.GetProductById(id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<ProductReadDto>(product));
+        }
+
         //POST METHODS
         [HttpPost("Like")]
         public async Task<IActionResult> CreateLikedProduct(LikedProductCreatedDto likedProductCreatedDto)
